@@ -6,7 +6,7 @@ const {
 const DailyRotateFile = require('winston-daily-rotate-file');
 
 const myFormat = format.printf(({
-  level, message, timestamp,
+  level, message,
 }) => `${timestamp} ${level}: ${message}`);
 
 const logger = createLogger({

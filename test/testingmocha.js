@@ -1,5 +1,5 @@
 const chai = require('chai');
-const lib = require('./index');
+const lib = require('../index');
 
 const { should } = chai;
 
