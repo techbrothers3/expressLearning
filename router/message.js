@@ -66,8 +66,8 @@ router.post('/books', (req, res) => {
   }
   res.send(req.body);
 });
-router.get('/authorName',(req,res) => {
-  const {book_name} = req.body;
+router.get('/book', (req, res) => {
+  const { book_name } = req.body;
   db.query(
     'select books.books_name, authors.author_name from books inner join authors on books.author_id = authors.author_id where books.books_name = ?',
     [book_name],
@@ -76,6 +76,9 @@ router.get('/authorName',(req,res) => {
       res.send(results);
     },
   );
+});
+router.get('/author', (req, res) => {
+  res.send('hi');
 });
 
 router.get('/', (req, res) => {
