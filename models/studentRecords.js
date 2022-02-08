@@ -1,10 +1,7 @@
-// import mongoose from 'mongoose';
 const mongoose = require('mongoose');
 
-const studentSchema = new mongoose.Schema({
-  student_id: mongoose.Schema.Types.ObjectId,
+const schema = new mongoose.Schema({
   name: String,
   marks: Number,
-
 });
-module.exports = mongoose.model('student', studentSchema);
+module.exports = mongoose.model('StudentRecords', schema);
