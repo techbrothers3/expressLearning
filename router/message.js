@@ -78,7 +78,15 @@ router.get('/book', (req, res) => {
   );
 });
 router.get('/author', (req, res) => {
-  res.send('hi');
+  const { author_name } = req.body;
+  db.query(
+    'select authors.author_name, books.books_name from authors inner join books on authors.author_id = books.author_id where authors.author_name = ?',
+    [author_name],
+    (err, results) => {
+      logger.info(results);
+      res.send(results);
+    },
+  );
 });
 
 router.get('/', (req, res) => {
