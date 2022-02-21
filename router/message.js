@@ -67,7 +67,7 @@ router.post('/books', (req, res) => {
   res.send(req.body);
 });
 router.get('/book', (req, res) => {
-  const { book_name } = req.body;
+  const book_name = req.params.name;
   db.query(
     'select books.books_name, authors.author_name from books inner join authors on books.author_id = authors.author_id where books.books_name = ?',
     [book_name],
@@ -77,11 +77,23 @@ router.get('/book', (req, res) => {
     },
   );
 });
-router.get('/author', (req, res) => {
-  const { author_name } = req.body;
+router.get('/author/:name', (req, res) => {
+  const author_name = req.params.name;
+  // res.send(author_name);
   db.query(
     'select authors.author_name, books.books_name from authors inner join books on authors.author_id = books.author_id where authors.author_name = ?',
     [author_name],
+    (err, results) => {
+      logger.info(results);
+      res.send(results);
+    },
+  );
+});
+router.get('/bookSearch/:name', (req, res) => {
+  const book_name = req.params.name;
+  db.query(
+    'select books.books_name, authors.author_name from books inner join authors on authors.author_id = books.author_id where books.books_name = ?',
+    [book_name],
     (err, results) => {
       logger.info(results);
       res.send(results);
